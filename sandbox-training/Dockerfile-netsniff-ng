@@ -24,9 +24,9 @@ RUN echo "demo ALL=(root) NOPASSWD:/usr/local/sbin/flowtop" 		>> /etc/sudoers.d/
 RUN echo "demo ALL=(root) NOPASSWD:/usr/local/sbin/astraceroute" 	>> /etc/sudoers.d/netsniff-ng
 RUN chmod 0440 /etc/sudoers.d/netsniff-ng && chown root:root /etc/sudoers.d/netsniff-ng
 RUN echo "alias netsniff-ng='sudo /usr/local/sbin/netsniff-ng'" 	>> /etc/profile.d/netsniff-ng.sh
-RUN echo "alias trafgen='sudo /usr/local/bin/sbin/trafgen'" 		>> /etc/profile.d/netsniff-ng.sh
-RUN echo "alias mausezahn='sudo /usr/local/bin/sbin/mausezahn'" 	>> /etc/profile.d/netsniff-ng.sh
-RUN echo "alias ifpps='sudo /usr/local/bin/sbin/ifpps'" 		>> /etc/profile.d/netsniff-ng.sh
-RUN echo "alias flowtop='sudo /usr/local/bin/sbin/flowtop'" 		>> /etc/profile.d/netsniff-ng.sh
-RUN echo "alias astraceroute='sudo /usr/local/bin/sbin/astraceroute'" 	>> /etc/profile.d/netsniff-ng.sh
+RUN echo "alias trafgen='sudo /usr/local/sbin/trafgen'" 		>> /etc/profile.d/netsniff-ng.sh
+RUN echo "alias mausezahn='sudo /usr/local/sbin/mausezahn'" 		>> /etc/profile.d/netsniff-ng.sh
+RUN echo "alias ifpps='sudo /usr/local/sbin/ifpps'" 			>> /etc/profile.d/netsniff-ng.sh
+RUN echo "alias flowtop='sudo /usr/local/sbin/flowtop'" 		>> /etc/profile.d/netsniff-ng.sh
+RUN echo "alias astraceroute='sudo /usr/local/sbin/astraceroute'" 	>> /etc/profile.d/netsniff-ng.sh
 RUN chmod 555 /etc/profile.d/netsniff-ng
