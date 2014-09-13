@@ -1,0 +1,93 @@
+#!/usr/bin/env bash
+# Global Variables
+CONFIG=/etc/sandbox/sandbox.conf
+if [ -f $CONFIG ]
+	source $CONFIG
+else
+	echo "$CONFIG not found! Exiting..."
+	exit 1
+fi
+
+clear
+
+if [ "$LOGNAME" == "bro" ] ;then
+IMAGE=bro-2.3.1
+echo "Welcome to Bro Live!"
+echo "===================="
+cat <<"EOF"
+    -----------
+  /             \
+ |  (   (0)   )  |
+ |            // |
+  \     <====// /
+    -----------
+EOF
+echo
+echo "A place to try out Bro."
+echo
+fi
+
+if [ "$LOGNAME" == "netsniff-ng" ] ;then
+IMAGE=netsniff-ng
+cat <<"EOF"
+=================================================================
+
+Welcome to Netsniff-NG Live!
+
+netsniff-ng is a free, performant       /(      )\
+Linux network analyzer and            .' {______} '.
+networking toolkit. If you will,       \ ^,    ,^ /
+the Swiss army knife for network        |'O\  /O'|   _.<0101011>--
+packets.                                > `'  '` <  /
+                                        ) ,.==., (  |
+Web: http://netsniff-ng.org          .-(|/--~~--\|)-'
+                                    (      ___
+                                     \__.=|___E
+
+A place to try out Netsniff-NG
+
+=================================================================
+
+EOF
+
+fi
+
+if [ "$LOGNAME" == "argus" ] ;then
+IMAGE=argus
+cat <<"EOF"
+=================================================================
+Welcome to ARGUS Live!
+
+		   <-------------------------------------------->
+Argus, the network Audit Record Generation and Utilization System.
+		   <-------------------------------------------->
+
+A place to try out ARGUS
+=================================================================
+
+EOF
+
+fi
+
+if [ "$LOGNAME" == "ids" ] ;then
+IMAGE=ids
+cat <<"EOF"
+=================================================================
+Welcome to IDS Live!
+
+      --== Initialization Complete ==--
+
+   ,,_     -*> Snort! <*-
+  o"  )~   <================>
+   ''''    -*> Suricata! <*-
+
+A place to try out Snort and Suricata
+=================================================================
+
+EOF
+
+fi
+
+#########################################
+exec timeout 1m $LAUNCH_CONTAINER $IMAGE
+#########################################
