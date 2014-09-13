@@ -1,0 +1,13 @@
+FROM      ubuntu
+MAINTAINER Jon Schipp <jonschipp@gmail.com>
+RUN apt-get update
+RUN apt-get install -y argus-client argus-server
+RUN apt-get install -y git vim tcpdump gawk
+RUN adduser --disabled-password --gecos "" demo
+RUN echo "export TMOUT=1800; readonly TMOUT" > /etc/profile.d/timeout.sh && chmod 555 /etc/profile.d/timeout.sh
+RUN su -l -c 'ln -s /exercises exercises' demo
+RUN echo "demo ALL=(root) NOPASSWD:/usr/sbin/argus"  >> /etc/sudoers.d/argus
+RUN chmod 0440 /etc/sudoers.d/argus && chown root:root  /etc/sudoers.d/argus
+RUN echo "alias argus='sudo /usr/sbin/argus'"   >> /etc/profile.d/argus.sh
+RUN chmod 666 /etc/argus.conf
+RUN sed -i '/ARGUS_DAEMON/s/yes/no/' /etc/argus.conf

@@ -1,0 +1,32 @@
+# Netsniff-ng Sandbox - Upstream Latest
+#
+# VERSION               1.0.1
+FROM      ubuntu
+MAINTAINER Jon Schipp <jonschipp@gmail.com>
+RUN apt-get update
+RUN apt-get install -y language-pack-en git make ccache flex bison libnl-3-dev libnl-genl-3-dev libgeoip-dev libnetfilter-conntrack-dev libncurses5-dev liburcu-dev libnacl-dev libpcap-dev zlib1g-dev libcli-dev libnet1-dev
+RUN apt-get install -y git vim tcpdump
+RUN adduser --disabled-password --gecos "" demo
+RUN mkdir -p /usr/local/share/man/man8
+RUN su -l -c 'git clone http://github.com/netsniff-ng/netsniff-ng && cd netsniff-ng && ./configure && make' demo
+RUN cd /home/demo/netsniff-ng && make install
+RUN su -l -c 'git clone http://github.com/jonschipp/gencfg' demo
+RUN echo "export TMOUT=1800; readonly TMOUT" > /etc/profile.d/timeout.sh && chmod 555 /etc/profile.d/timeout.sh
+RUN su -l -c 'ln -s /exercises exercises' demo
+
+# DANGEROUS: Comment lines below if you would NOT like the user to be able to run netsniff-ng on an interface
+# Allowed by default for teaching. Only accessible by students.
+RUN echo "demo ALL=(root) NOPASSWD:/usr/local/sbin/netsniff-ng" 	>> /etc/sudoers.d/netsniff-ng
+RUN echo "demo ALL=(root) NOPASSWD:/usr/local/sbin/trafgen" 		>> /etc/sudoers.d/netsniff-ng
+RUN echo "demo ALL=(root) NOPASSWD:/usr/local/sbin/mausezahn" 		>> /etc/sudoers.d/netsniff-ng
+RUN echo "demo ALL=(root) NOPASSWD:/usr/local/sbin/ifpps" 		>> /etc/sudoers.d/netsniff-ng
+RUN echo "demo ALL=(root) NOPASSWD:/usr/local/sbin/flowtop" 		>> /etc/sudoers.d/netsniff-ng
+RUN echo "demo ALL=(root) NOPASSWD:/usr/local/sbin/astraceroute" 	>> /etc/sudoers.d/netsniff-ng
+RUN chmod 0440 /etc/sudoers.d/netsniff-ng && chown root:root /etc/sudoers.d/netsniff-ng
+RUN echo "alias netsniff-ng='sudo /usr/local/sbin/netsniff-ng'" 	>> /etc/profile.d/netsniff-ng.sh
+RUN echo "alias trafgen='sudo /usr/local/bin/sbin/trafgen'" 		>> /etc/profile.d/netsniff-ng.sh
+RUN echo "alias mausezahn='sudo /usr/local/bin/sbin/mausezahn'" 	>> /etc/profile.d/netsniff-ng.sh
+RUN echo "alias ifpps='sudo /usr/local/bin/sbin/ifpps'" 		>> /etc/profile.d/netsniff-ng.sh
+RUN echo "alias flowtop='sudo /usr/local/bin/sbin/flowtop'" 		>> /etc/profile.d/netsniff-ng.sh
+RUN echo "alias astraceroute='sudo /usr/local/bin/sbin/astraceroute'" 	>> /etc/profile.d/netsniff-ng.sh
+RUN chmod 555 /etc/profile.d/netsniff-ng
