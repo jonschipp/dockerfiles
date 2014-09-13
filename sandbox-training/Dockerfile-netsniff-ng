@@ -29,4 +29,4 @@ RUN echo "alias mausezahn='sudo /usr/local/sbin/mausezahn'" 		>> /etc/profile.d/
 RUN echo "alias ifpps='sudo /usr/local/sbin/ifpps'" 			>> /etc/profile.d/netsniff-ng.sh
 RUN echo "alias flowtop='sudo /usr/local/sbin/flowtop'" 		>> /etc/profile.d/netsniff-ng.sh
 RUN echo "alias astraceroute='sudo /usr/local/sbin/astraceroute'" 	>> /etc/profile.d/netsniff-ng.sh
-RUN chmod 555 /etc/profile.d/netsniff-ng
+RUN chmod 555 /etc/profile.d/netsniff-ng.sh
