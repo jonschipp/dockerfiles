@@ -5,7 +5,7 @@ FROM      ubuntu
 MAINTAINER Jon Schipp <jonschipp@gmail.com>
 RUN apt-get update
 RUN apt-get install -y language-pack-en git make ccache flex bison libnl-3-dev libnl-genl-3-dev libgeoip-dev libnetfilter-conntrack-dev libncurses5-dev liburcu-dev libnacl-dev libpcap-dev zlib1g-dev libcli-dev libnet1-dev
-RUN apt-get install -y git vim tcpdump
+RUN apt-get install -y git vim emacs nano tcpdump gawk
 RUN adduser --disabled-password --gecos "" demo
 RUN mkdir -p /usr/local/share/man/man8
 RUN su -l -c 'git clone http://github.com/netsniff-ng/netsniff-ng && cd netsniff-ng && ./configure && make' demo
