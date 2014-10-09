@@ -10,6 +10,7 @@ ENV VIRTUSER demo
 RUN apt-get update
 RUN apt-get install -y tcpdump tshark
 RUN apt-get install -y git vim emacs nano gawk
+RUN apt-get install -y --no-install-recommends man-db
 RUN adduser --disabled-password --gecos "" $VIRTUSER
 RUN echo "export TMOUT=1800; readonly TMOUT" > /etc/profile.d/timeout.sh && chmod 555 /etc/profile.d/timeout.sh
 RUN setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
