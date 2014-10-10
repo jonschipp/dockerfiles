@@ -7,7 +7,7 @@ MAINTAINER Jon Schipp <jonschipp@gmail.com>
 # Specify container username e.g. training, demo
 ENV VIRTUSER demo
 
-RUN apt-get update
+RUN apt-get update -qq
 RUN apt-get install -y snort suricata
 RUN apt-get install -y git vim emacs nano tcpdump gawk
 RUN apt-get install -y --no-install-recommends man-db
