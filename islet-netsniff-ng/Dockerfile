@@ -9,7 +9,7 @@ ENV VIRTUSER demo
 
 RUN apt-get update -qq
 RUN apt-get install -y language-pack-en git make ccache flex bison libnl-3-dev libnl-genl-3-dev libgeoip-dev libnetfilter-conntrack-dev libncurses5-dev liburcu-dev libnacl-dev libpcap-dev zlib1g-dev libcli-dev libnet1-dev
-RUN apt-get install -y telnet iptables git vim emacs nano tcpdump gawk collectd
+RUN apt-get install -y telnet iptables git vim emacs nano tcpdump gawk collectd rsyslog
 RUN apt-get install -y --no-install-recommends man-db
 RUN adduser --disabled-password --gecos "" $VIRTUSER
 RUN mkdir -p /usr/local/share/man/man8

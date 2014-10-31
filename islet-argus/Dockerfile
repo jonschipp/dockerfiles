@@ -9,7 +9,7 @@ ENV VIRTUSER demo
 
 RUN apt-get update -qq
 RUN apt-get install -y argus-client argus-server
-RUN apt-get install -y git vim emacs nano tcpdump gawk collectd
+RUN apt-get install -y git vim emacs nano tcpdump gawk collectd rsyslog
 RUN apt-get install -y --no-install-recommends man-db
 RUN adduser --disabled-password --gecos "" $VIRTUSER
 RUN echo "export TMOUT=1800; readonly TMOUT" > /etc/profile.d/timeout.sh && chmod 555 /etc/profile.d/timeout.sh

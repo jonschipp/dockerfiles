@@ -9,7 +9,7 @@ ENV VIRTUSER demo
 
 RUN apt-get update -qq
 RUN apt-get install -y snort suricata
-RUN apt-get install -y git vim emacs nano tcpdump gawk collectd
+RUN apt-get install -y git vim emacs nano tcpdump gawk collectd rsyslog
 RUN apt-get install -y --no-install-recommends man-db
 RUN mv /etc/suricata/suricata-debian.yaml /etc/suricata/suricata.yaml
 RUN chmod -R 777 /etc/snort /etc/suricata

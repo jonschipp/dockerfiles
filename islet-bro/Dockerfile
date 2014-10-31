@@ -13,7 +13,7 @@ ENV DST /home/$VIRTUSER/bro
 
 RUN apt-get update -qq
 RUN apt-get install -y build-essential cmake make gcc g++ flex bison libpcap-dev libgeoip-dev libssl-dev python-dev zlib1g-dev libmagic-dev swig2.0 wget
-RUN apt-get install -y git gawk vim emacs nano tcpdump collectd
+RUN apt-get install -y git gawk vim emacs nano tcpdump collectd rsyslog
 RUN apt-get install -y --no-install-recommends man-db
 RUN adduser --disabled-password --gecos "" $VIRTUSER
 RUN su -l -c "wget http://www.bro.org/downloads/release/$BRO_VERSION.tar.gz && tar -xzf $BRO_VERSION.tar.gz" $VIRTUSER
