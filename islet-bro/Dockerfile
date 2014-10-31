@@ -13,7 +13,7 @@ ENV DST /home/$VIRTUSER/bro
 
 RUN apt-get update -qq
 RUN apt-get install -y build-essential cmake make gcc g++ flex bison libpcap-dev libgeoip-dev libssl-dev python-dev zlib1g-dev libmagic-dev swig2.0 wget
-RUN apt-get install -y gawk vim emacs nano
+RUN apt-get install -y git gawk vim emacs nano tcpdump collectd
 RUN apt-get install -y --no-install-recommends man-db
 RUN adduser --disabled-password --gecos "" $VIRTUSER
 RUN su -l -c "wget http://www.bro.org/downloads/release/$BRO_VERSION.tar.gz && tar -xzf $BRO_VERSION.tar.gz" $VIRTUSER
@@ -21,6 +21,8 @@ RUN su -l -c "cd $BRO_VERSION && ./configure --prefix=$DST && make && make insta
 RUN rm -rf /home/$VIRTUSER/$BRO_VERSION*
 RUN echo "PATH=$PATH:/usr/local/bro/bin/" > /etc/profile.d/bro.sh && chmod 555 /etc/profile.d/bro.sh
 RUN echo "export TMOUT=1800; readonly TMOUT" > /etc/profile.d/timeout.sh && chmod 555 /etc/profile.d/timeout.sh
+RUN sed -i '/LoadPlugin network/s/^#//' /etc/collectd/collectd.conf
+RUN printf '<Plugin "network">\n\tServer "collectd" "25826"\n</Plugin>\n' > /etc/collectd/collectd.conf.d/islet.conf
 RUN su -l -c 'ln -s /exercises exercises' $VIRTUSER
 RUN ln -s $DST /usr/local/bro
 RUN setcap cap_net_raw,cap_net_admin=eip $DST/bin/bro
