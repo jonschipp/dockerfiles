@@ -1,0 +1,66 @@
+# Package generated configuration file
+# See the sshd_config(5) manpage for details
+
+Port 22
+AddressFamily inet
+Protocol 2
+# HostKeys for protocol version 2
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_dsa_key
+HostKey /etc/ssh/ssh_host_ecdsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+UsePrivilegeSeparation yes
+
+KeyRegenerationInterval 3600
+ServerKeyBits 1024
+
+SyslogFacility AUTH
+LogLevel INFO
+
+# Authentication:
+LoginGraceTime 120
+PermitRootLogin no
+StrictModes yes
+
+RSAAuthentication yes
+PubkeyAuthentication yes
+#AuthorizedKeysFile %h/.ssh/authorized_keys
+
+IgnoreRhosts yes
+RhostsRSAAuthentication no
+HostbasedAuthentication no
+
+PermitEmptyPasswords no
+ChallengeResponseAuthentication no
+
+X11Forwarding yes
+X11DisplayOffset 10
+PrintMotd no
+PrintLastLog yes
+TCPKeepAlive yes
+#UseLogin no
+
+#MaxStartups 10:30:60
+#Banner /etc/issue.net
+
+# Allow client to pass locale environment variables
+AcceptEnv LANG LC_*
+
+#Subsystem sftp /usr/lib/openssh/sftp-server
+
+UsePAM yes
+
+ClientAliveInterval 15
+ClientAliveCountMax 10
+
+Match User "demo"
+  ForceCommand "/opt/islet/bin/islet_shell"
+  PasswordAuthentication yes
+  X11Forwarding no
+  AllowTcpForwarding no
+  GatewayPorts no
+  PermitTunnel no
+  MaxAuthTries 3
+  MaxSessions 1
+  AllowAgentForwarding no
+  PermitEmptyPasswords no
