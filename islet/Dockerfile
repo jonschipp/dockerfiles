@@ -1,7 +1,7 @@
 # ISLET - Runs ISLET in a container
 #
-# VERSION               0.3
-# docker run -d -v /usr/bin/docker:/usr/bin/docker:ro \
+# VERSION               1.0
+# docker run -d --name="islet" -v /usr/bin/docker:/usr/bin/docker:ro \
 # -v /var/lib/docker/:/var/lib/docker:rw -v /exercises:/exercises:ro \
 # -v /var/run/docker.sock:/var/run/docker.sock -p 2222:22 test
 
