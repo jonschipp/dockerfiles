@@ -1,8 +1,8 @@
 # ISLET - Runs ISLET in a container
 #
-# VERSION               0.1
+# VERSION               0.3
 # docker run -d -v /usr/bin/docker:/usr/bin/docker:ro \
-# -v /var/lib/docker/:/var/lib/docker:rw \
+# -v /var/lib/docker/:/var/lib/docker:rw -v /exercises:/exercises:ro \
 # -v /var/run/docker.sock:/var/run/docker.sock -p 2222:22 test
 
 FROM      ubuntu
@@ -12,7 +12,7 @@ RUN apt-get update -qq
 RUN apt-get install -yq git sqlite3 pv make openssh-server supervisor
 RUN apt-get install -yq git gawk vim emacs nano tcpdump rsyslog
 RUN apt-get install -yq --no-install-recommends man-db
-RUN mkdir -p /var/run/sshd
+RUN mkdir -p /var/run/sshd /exercises
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD sshd_config /etc/ssh/sshd_config
 RUN cd /root && git clone http://github.com/jonschipp/ISLET
