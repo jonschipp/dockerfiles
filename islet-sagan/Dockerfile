@@ -30,6 +30,6 @@ RUN mkfifo /var/run/sagan.fifo
 RUN chown sagan:sagan /var/run/sagan.fifo
 RUN chmod 666 /var/run/sagan.fifo /var/log/*
 RUN /bin/echo -e '#Sagan template\n$template sagan,"%fromhost-ip%|%syslogfacility-text%|%syslogpriority-text%|%syslogseverity-text%|%syslogtag%|%timegenerated:1:10:date-rfc3339%|%timegenerated:12:19:date-rfc3339%|%programname%|%msg%\\n"\n*.*     |/var/run/sagan.fifo;sagan' > /etc/rsyslog.d/sagan.conf
-RUN /bin/echo -e '$VIRTUSER ALL=(root) NOPASSWD:/usr/local/sbin/sagan\n$VIRTUSER ALL=(root) NOPASSWD:/usr/sbin/service rsyslog*' > /etc/sudoers.d/sagan
+RUN /bin/echo -e "$VIRTUSER ALL=(root) NOPASSWD:/usr/local/sbin/sagan\n$VIRTUSER ALL=(root) NOPASSWD:/usr/sbin/service rsyslog*" > /etc/sudoers.d/sagan
 RUN setcap cap_net_raw,cap_net_admin=eip /usr/local/sbin/sagan
 RUN echo "export TMOUT=1800; readonly TMOUT" > /etc/profile.d/timeout.sh && chmod 555 /etc/profile.d/timeout.sh
