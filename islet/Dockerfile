@@ -1,6 +1,6 @@
 # ISLET - Runs ISLET in a container
 #
-# VERSION               1.0
+# VERSION               1.2
 # docker run -d --name="islet" -v /usr/bin/docker:/usr/bin/docker:ro \
 # -v /var/lib/docker/:/var/lib/docker:rw -v /exercises:/exercises:ro \
 # -v /var/run/docker.sock:/var/run/docker.sock -p 2222:22 test
@@ -16,7 +16,7 @@ RUN mkdir -p /var/run/sshd /exercises
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD sshd_config /etc/ssh/sshd_config
 RUN cd /root && git clone http://github.com/jonschipp/ISLET
-RUN cd /root/ISLET && make install && make user-config
+RUN cd /root/ISLET && make update && make install && make user-config
 RUN cp /root/ISLET/extra/*.conf /etc/islet
 RUN sed -i 's/docker start/sudo docker start/' /opt/islet/bin/islet_login
 RUN sed -i 's/docker attach/sudo docker attach/' /opt/islet/bin/islet_login
