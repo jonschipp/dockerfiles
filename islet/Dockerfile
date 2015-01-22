@@ -10,7 +10,7 @@ MAINTAINER Jon Schipp <jonschipp@gmail.com>
 
 RUN apt-get update -qq
 RUN apt-get install -yq git sqlite3 pv make openssh-server supervisor
-RUN apt-get install -yq git gawk vim emacs nano tcpdump rsyslog
+RUN apt-get install -yq gawk vim emacs nano tcpdump rsyslog
 RUN apt-get install -yq --no-install-recommends man-db
 RUN mkdir -p /var/run/sshd /exercises
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
