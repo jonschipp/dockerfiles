@@ -19,9 +19,9 @@ ADD sshd_config /etc/ssh/sshd_config
 RUN cd /root && git clone http://github.com/jonschipp/ISLET
 RUN cd /root/ISLET && make update && make install && make user-config
 RUN cp /root/ISLET/extra/*.conf /etc/islet
-RUN sed -i 's/docker start/sudo docker start/' /opt/islet/bin/islet_login
-RUN sed -i 's/docker attach/sudo docker attach/' /opt/islet/bin/islet_login
-RUN sed -i 's/docker run/sudo docker run/' /opt/islet/bin/islet_login
+#RUN sed -i 's/docker start/sudo docker start/' /opt/islet/bin/islet_login
+#RUN sed -i 's/docker attach/sudo docker attach/' /opt/islet/bin/islet_login
+#RUN sed -i 's/docker run/sudo docker run/' /opt/islet/bin/islet_login
 ADD islet.sudoers /etc/sudoers.d/islet
 RUN chmod 0440 /etc/sudoers.d/islet
 CMD ["/usr/bin/supervisord","-c","/etc/supervisor/supervisord.conf"]
